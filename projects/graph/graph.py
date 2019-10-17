@@ -11,23 +11,61 @@ class Graph:
         """
         Add a vertex to the graph.
         """
+        self.vertices[vertex] = set()
+
         pass  # TODO
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
+        set_of_friends = self.vertices[v1]
+        set_of_friends.add(v2)
+
         pass  # TODO
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
+        queue = Queue()
+
+        visited = set()
+
+        queue.enqueue(starting_vertex)
+        
+        while queue.size():
+            current_node = queue.dequeue()
+            print("bft", current_node)
+
+            if current_node not in visited:
+                visited.add(current_node)
+            
+                for neighbor in self.vertices[current_node]:
+                    queue.enqueue(neighbor)
+            
         pass  # TODO
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
+
+        stack = []
+
+        visited = set()
+        
+        stack.append(starting_vertex)
+
+        while len(stack):
+            current_node = stack.pop()
+            print("dft", current_node)
+
+            if current_node not in visited:
+                visited.add(current_node)
+
+                for neighbor in self.vertices[current_node]:
+                    stack.append(neighbor)
+
         pass  # TODO
     def dft_recursive(self, starting_vertex):
         """
