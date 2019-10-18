@@ -21,7 +21,9 @@ class Graph:
         set_of_friends = self.vertices[v1]
         set_of_friends.add(v2)
 
-        pass  # TODO
+    def getNeighbors(self, vertex):
+        return self.vertices[vertex]
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
@@ -56,7 +58,7 @@ class Graph:
         
         stack.append(starting_vertex)
 
-        while len(stack):
+        while len(stack) > 0:
             current_node = stack.pop()
             print("dft", current_node)
 
@@ -67,19 +69,52 @@ class Graph:
                     stack.append(neighbor)
 
         pass  # TODO
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, node, visited=set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
+        # Base case
+        if node not in visited:
+            print("node", node)
+            visited.add(node)
+
+            neighbors = self.getNeighbors(node)
+            for neighbor in neighbors:
+                self.dft_recursive(neighbor, visited)
+
         pass  # TODO
     def bfs(self, starting_vertex, destination_vertex):
         """
+        Search + shortest path
+
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
+        quque = Queue()
+        visited = set()
+
+        path = [starting_vertex]
+        quque.enqueue(path)
+
+        while quque.size > 0:
+            current_path = quque.dequeue()
+            current_node = current_path[-1] #last node
+
+            if current_node == destination_vertex:
+                return current_path
+
+            if current_node not in visited:
+                visited.add(current_node)
+                neighbors = self.getNeighbors(current_node)
+
+                for neighbor in neighbors:
+                    path_copy = current_path[:]
+                    path_copy.append(neighbor)
+                    quque.enqueue(path_copy)
+
         pass  # TODO
     def dfs(self, starting_vertex, destination_vertex):
         """

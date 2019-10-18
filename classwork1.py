@@ -23,26 +23,26 @@
 
 #   neighbors = [F]
 
-def bft(start_node):
+def bft(self, start_node):
   q = Queue()
 
   visited = set()
 
   q.enqueue(start_node)
 
-  while q.length():
+  while q.size():
     current_node = q.dequque()
 
     if current_node not in visited:
       visited.add(current_node)
       
-      neighbors = getNeighbors()
+      neighbors = self.getNeighbors(current_node)
       
       for neighbor in neighbors:
         q.enqueue(neighbor)
 
 
-def dft(start_node):
+def dft(self, start_node):
   # make a stack, for the nodes we are about to visit
   stack = []
   # make a set for visited nodes
@@ -56,7 +56,7 @@ def dft(start_node):
   ### if current node has not yet been visited:
     if current_node not in visited:
       visited.add(current_node)
-      neighbors = getNeighbors()
+      neighbors = self.getNeighbors(current_node)
       for neighbor in neighbors:
         stack.append(neighbor)
   ### mark the current node as visited by putting it in our visited set
