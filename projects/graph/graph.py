@@ -96,10 +96,10 @@ class Graph:
         quque = Queue()
         visited = set()
 
-        path = [starting_vertex]
+        path = [starting_vertex] # enqueing a list to get all possible solution
         quque.enqueue(path)
 
-        while quque.size > 0:
+        while quque.size() > 0:
             current_path = quque.dequeue()
             current_node = current_path[-1] #last node
 
@@ -122,11 +122,27 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        stack = Stack()
+        visited = set()
 
+        path = [starting_vertex]
+        stack.push(path)
 
+        while stack.size() > 0:
+            current_path = stack.pop()
+            current_node = current_path[-1]
 
+            if current_node == destination_vertex:
+                return current_path
+            
+            if current_node not in visited:
+                visited.add(current_node)
+                neighbors = self.getNeighbors(current_node)
 
+                for neighbor in neighbors:
+                    new_path = current_path[:]
+                    new_path.append(neighbor)
+                    stack.push(new_path)
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
