@@ -138,6 +138,7 @@ class Graph:
             if current_node not in visited:
                 visited.add(current_node)
                 neighbors = self.getNeighbors(current_node)
+                print("neighbors", neighbors)
 
                 for neighbor in neighbors:
                     new_path = current_path[:]
