@@ -77,6 +77,7 @@ class SocialGraph:
                 friends.append((user, friend))
 
         random.shuffle(friends)
+        
         friends_to_make = friends[:times_to_call_addFriendship]
 
         for friendship in friends_to_make:
